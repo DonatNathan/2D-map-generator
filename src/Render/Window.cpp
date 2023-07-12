@@ -1,6 +1,6 @@
 #include "Render/Window.hpp"
 
-MyWindow::MyWindow()
+MyWindow::MyWindow(Map *map, Grid *grid)
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
         std::cerr << "Failed to open SDL video library" << std::endl;
@@ -10,6 +10,8 @@ MyWindow::MyWindow()
     _surface = SDL_GetWindowSurface(_window);
     if (!_surface)
         std::cerr << "Failed to load surface" << std::endl;
+    _map = map;
+    _grid = grid;
 }
 
 MyWindow::~MyWindow()
@@ -21,6 +23,7 @@ MyWindow::~MyWindow()
 void MyWindow::drawWindow()
 {
     SDL_FillRect(_surface, NULL, SDL_MapRGB(_surface->format, 0, 0, 0));
+    _grid->displayGrid(_surface);
     SDL_UpdateWindowSurface(_window);
 }
 

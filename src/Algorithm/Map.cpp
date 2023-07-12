@@ -1,10 +1,10 @@
 #include "Algorithm/Map.hpp"
 #include <time.h>
 
-Map::Map()
+Map::Map(int width, int height)
 {
-    _height = 10;
-    _width = 10;
+    _height = height;
+    _width = width;
     _iteration = 0;
     _noisePercentage = 50;
 }
@@ -38,4 +38,9 @@ void Map::displayMap()
         }
         std::cout << std::endl;
     }
+}
+
+std::vector<std::vector<int>> *Map::getMap()
+{
+    return &_map;
 }

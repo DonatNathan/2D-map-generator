@@ -3,11 +3,12 @@
 
 class Map {
     public:
-        Map();
+        Map(int width, int height);
         ~Map();
 
         void createNoiseGrid();
         void displayMap();
+        std::vector<std::vector<int>> *getMap();
 
     private:
         std::vector<std::vector<int>> _map;

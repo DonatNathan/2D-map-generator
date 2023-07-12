@@ -1,16 +1,30 @@
 #include <iostream>
-#include "Algorithm/Map.hpp"
 #include "Render/Window.hpp"
 
 int main(int argc, char **argv)
 {
     std::cout << "Hello Generator !" << std::endl;
 
-    Map theMap;
-    theMap.createNoiseGrid();
-    theMap.displayMap();
+    int height;
+    int width;
 
-    MyWindow win;
+    if (argc != 3 && argc != 1) {
+        std::cerr << "Invalid number of arguments" << std::endl;
+        return 84;
+    } else if (argc == 1) {
+        height = 50;
+        width = 50;
+    } else {
+        height = atoi(argv[2]);
+        width = atoi(argv[1]);
+    }
+
+    Map theMap(width, height);
+    theMap.createNoiseGrid();
+
+    Grid grid(&theMap);
+
+    MyWindow win(&theMap, &grid);
     win.startLoop();
 
     return 0;

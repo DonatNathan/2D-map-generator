@@ -1,9 +1,10 @@
 #include <iostream>
 #include <SDL2/SDL.h>
+#include "Render/Grid.hpp"
 
 class MyWindow {
     public:
-        MyWindow();
+        MyWindow(Map *map, Grid *grid);
         ~MyWindow();
 
         void startLoop();
@@ -15,4 +16,6 @@ class MyWindow {
         SDL_Event _event;
         SDL_Surface *_surface;
         bool _running;
+        Map *_map;
+        Grid *_grid;
 };

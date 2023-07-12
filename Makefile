@@ -2,6 +2,8 @@ PP = g++
 src = src/main.cpp	\
 	  src/Algorithm/Map.cpp	\
 	  src/Render/Window.cpp	\
+	  src/Render/Grid.cpp	\
+	  src/Render/Cell.cpp	\
 
 NAME = map_generator
 OBJ = ${src:.cpp=.o}
