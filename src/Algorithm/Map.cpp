@@ -160,3 +160,15 @@ int Map::getCell(std::vector<int> vector, int i)
     for (; cmpt != i; cell++, cmpt++);
     return *cell;
 }
+
+void Map::writeMapOnFile()
+{
+    std::ofstream file("map.txt");
+    for (auto y = _map.begin(); y != _map.end(); y++) {
+        for (auto x = (*y).begin(); x != (*y).end(); x++) {
+            file << (*x);
+        }
+        file << std::endl;
+    }
+    std::cout << "Map saved." << std::endl;
+}

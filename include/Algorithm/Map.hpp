@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 
 class Map {
@@ -19,6 +20,8 @@ class Map {
 
         int countWall(int x, int y);
         void checkTwoSides(std::vector<int> vector, int x, int *nbWalls, bool mid);
+
+        void writeMapOnFile();
 
         std::vector<std::vector<int>> *getMap();
 

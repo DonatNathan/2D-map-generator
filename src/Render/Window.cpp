@@ -41,13 +41,20 @@ void MyWindow::checkEvents()
         if (_event.type == SDL_QUIT)
             _running = false;
         if (_event.type == SDL_KEYDOWN) {
-            if (_event.key.keysym.sym == SDLK_RIGHT)
+            if (_event.key.keysym.sym == SDLK_RIGHT) {
                 _map->nextIteration();
-            if (_event.key.keysym.sym == SDLK_UP)
+                _grid->resetGrid();
+            }
+            if (_event.key.keysym.sym == SDLK_UP) {
                 _map->increaseNoise();
-            if (_event.key.keysym.sym == SDLK_DOWN)
+                _grid->resetGrid();
+            }
+            if (_event.key.keysym.sym == SDLK_DOWN) {
                 _map->decreaseNoise();
-            _grid->resetGrid();
+                _grid->resetGrid();
+            }
+            if (_event.key.keysym.sym == SDLK_RETURN)
+                _map->writeMapOnFile();
         }
     }
 }

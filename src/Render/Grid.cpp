@@ -3,7 +3,7 @@
 Grid::Grid(Map *map)
 {
     _map = map;
-    _size = 10;
+    _size = 1;
     createGrid();
 }
 
