@@ -49,10 +49,12 @@ void Map::nextIteration()
 {
     std::vector<std::vector<int>> newMap;
 
-    for (auto y = _map.begin(); y != _map.end(); y++) {
+    int cmpt_y = 1;
+    for (auto y = _map.begin(); y != _map.end(); y++, cmpt_y++) {
         std::vector<int> temp;
-        for (auto x = (*y).begin(); x != (*y).end(); x++) {
-            int nbWalls = 0; //CountWall function
+        int cmpt_x = 1;
+        for (auto x = (*y).begin(); x != (*y).end(); x++, cmpt_x++) {
+            int nbWalls = countWall(cmpt_x, cmpt_y); //CountWall function
             if (nbWalls > 4)
                 temp.push_back(1);
             else
@@ -92,4 +94,69 @@ void Map::resetMap()
 {
     freeMap();
     createNoiseGrid();
+}
+
+int Map::countWall(int x, int y)
+{
+    int nbWalls = 0;
+    int nbBorders = 0;
+
+    if (y == 1) {
+        nbWalls += 3;
+        nbBorders++;
+    } else {
+        std::vector<int> vec = getVector(y - 1);
+        checkTwoSides(vec, x, &nbWalls, false);
+    }
+
+    std::vector<int> midVec = getVector(y);
+    checkTwoSides(midVec, x, &nbWalls, true);
+
+    if (y == (int)_map.size()) {
+        nbWalls += 3;
+        nbBorders++;
+    } else {
+        std::vector<int> vec = getVector(y + 1);
+        checkTwoSides(vec, x, &nbWalls, false);
+    }
+
+    if (x == 1) {
+        nbWalls += 3;
+        nbBorders++;
+    }
+    if (x == (int)(*_map.begin()).size()) {
+        nbWalls += 3;
+        nbBorders++;
+    }
+    if (nbBorders == 4)
+        nbWalls -= nbBorders;
+    else if (nbBorders > 1)
+        nbWalls -= nbBorders - 1;
+    return nbWalls;
+}
+
+void Map::checkTwoSides(std::vector<int> vector, int x, int *nbWalls, bool mid)
+{
+    if (x != 1)
+        *nbWalls += getCell(vector, x - 1);
+    if (!mid)
+        *nbWalls += getCell(vector, x);
+    if (x != (int)(*_map.begin()).size())
+        *nbWalls += getCell(vector, x + 1);
+}
+
+std::vector<int> Map::getVector(int i)
+{
+    int cmpt = 1;
+    auto vector = _map.begin();
+    for (; cmpt != i; vector++, cmpt++);
+    return *vector;
+}
+
+int Map::getCell(std::vector<int> vector, int i)
+{
+    int cmpt = 1;
+    auto cell = vector.begin();
+    for (; cmpt != i; cell++, cmpt++);
+    return *cell;
 }

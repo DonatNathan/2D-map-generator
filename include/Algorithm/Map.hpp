@@ -6,6 +6,9 @@ class Map {
         Map(int width, int height);
         ~Map();
 
+        std::vector<int> getVector(int i);
+        int getCell(std::vector<int> vector, int i);
+
         void createNoiseGrid();
         void displayMap();
         void nextIteration();
@@ -13,6 +16,10 @@ class Map {
         void decreaseNoise();
         void freeMap();
         void resetMap();
+
+        int countWall(int x, int y);
+        void checkTwoSides(std::vector<int> vector, int x, int *nbWalls, bool mid);
+
         std::vector<std::vector<int>> *getMap();
 
     private:
