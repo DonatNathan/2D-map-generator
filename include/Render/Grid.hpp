@@ -11,6 +11,8 @@ class Grid {
 
         void createGrid();
         void displayGrid(SDL_Surface *surface);
+        void resetGrid();
+        void freeGrid();
     private:
         std::vector<std::vector<Cell *>> _grid;
         Map *_map;

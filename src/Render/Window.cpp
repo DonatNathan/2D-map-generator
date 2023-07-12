@@ -22,7 +22,7 @@ MyWindow::~MyWindow()
 
 void MyWindow::drawWindow()
 {
-    SDL_FillRect(_surface, NULL, SDL_MapRGB(_surface->format, 0, 0, 0));
+    SDL_FillRect(_surface, NULL, SDL_MapRGB(_surface->format, 155, 155, 155));
     _grid->displayGrid(_surface);
     SDL_UpdateWindowSurface(_window);
 }
@@ -40,5 +40,14 @@ void MyWindow::checkEvents()
     while (SDL_PollEvent(&_event) > 0) {
         if (_event.type == SDL_QUIT)
             _running = false;
+        if (_event.type == SDL_KEYDOWN) {
+            if (_event.key.keysym.sym == SDLK_RIGHT)
+                _map->nextIteration();
+            if (_event.key.keysym.sym == SDLK_UP)
+                _map->increaseNoise();
+            if (_event.key.keysym.sym == SDLK_DOWN)
+                _map->decreaseNoise();
+            _grid->resetGrid();
+        }
     }
 }

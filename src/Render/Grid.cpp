@@ -33,3 +33,14 @@ void Grid::displayGrid(SDL_Surface *surface)
         }
     }
 }
+
+void Grid::freeGrid()
+{
+    _grid.clear();
+}
+
+void Grid::resetGrid()
+{
+    freeGrid();
+    createGrid();
+}
