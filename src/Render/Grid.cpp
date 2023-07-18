@@ -3,7 +3,7 @@
 Grid::Grid(Map *map)
 {
     _map = map;
-    _size = 1;
+    _size = 5;
     createGrid();
 }
 
@@ -25,11 +25,11 @@ void Grid::createGrid()
     }
 }
 
-void Grid::displayGrid(SDL_Surface *surface)
+void Grid::displayGrid(SDL_Renderer *renderer)
 {
     for (auto y = _grid.begin(); y != _grid.end(); y++) {
         for (auto x = (*y).begin(); x != (*y).end(); x++) {
-            (*x)->displayCell(surface);
+            (*x)->displayCell(renderer);
         }
     }
 }

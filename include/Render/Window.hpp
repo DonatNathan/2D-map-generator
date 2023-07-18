@@ -13,8 +13,8 @@ class MyWindow {
 
     private:
         SDL_Window *_window;
+        SDL_Renderer *_renderer;
         SDL_Event _event;
-        SDL_Surface *_surface;
         bool _running;
         Map *_map;
         Grid *_grid;

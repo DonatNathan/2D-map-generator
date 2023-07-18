@@ -3,28 +3,29 @@
 MyWindow::MyWindow(Map *map, Grid *grid)
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
-        std::cerr << "Failed to open SDL video library" << std::endl;
+        std::cerr << "Failed to open SDL video library : " << SDL_GetError() << std::endl;
     _window = SDL_CreateWindow("Generator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, 0);
     if (!_window)
-        std::cerr << "Failed to load window" << std::endl;
-    _surface = SDL_GetWindowSurface(_window);
-    if (!_surface)
-        std::cerr << "Failed to load surface" << std::endl;
+        std::cerr << "Failed to load window : " << SDL_GetError() << std::endl;
     _map = map;
     _grid = grid;
+    _renderer = SDL_CreateRenderer(_window, -1, 0);
+    if (!_renderer)
+        std::cerr << "Failed to load renderer : " << SDL_GetError() << std::endl;
+    _running = true;
 }
 
 MyWindow::~MyWindow()
 {
-    SDL_FreeSurface(_surface);
     SDL_DestroyWindow(_window);
+    SDL_DestroyRenderer(_renderer);
 }
 
 void MyWindow::drawWindow()
 {
-    SDL_FillRect(_surface, NULL, SDL_MapRGB(_surface->format, 155, 155, 155));
-    _grid->displayGrid(_surface);
-    SDL_UpdateWindowSurface(_window);
+    SDL_RenderClear(_renderer);
+    _grid->displayGrid(_renderer);
+    SDL_RenderPresent(_renderer);
 }
 
 void MyWindow::startLoop()

@@ -14,7 +14,8 @@ Cell::~Cell()
 
 }
 
-void Cell::displayCell(SDL_Surface *surface)
+void Cell::displayCell(SDL_Renderer *renderer)
 {
-    SDL_FillRect(surface, &_object, SDL_MapRGB(surface->format, _color.r, _color.g, _color.b));
+    SDL_SetRenderDrawColor(renderer, _color.r, _color.g, _color.b, 255);
+    SDL_RenderFillRect(renderer, &_object);
 }

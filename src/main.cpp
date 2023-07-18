@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 
     Map theMap(width, height);
     theMap.createNoiseGrid();
-    theMap.displayMap();
+    // theMap.displayMap();
 
     Grid grid(&theMap);
 

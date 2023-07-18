@@ -10,9 +10,10 @@ class Grid {
         ~Grid();
 
         void createGrid();
-        void displayGrid(SDL_Surface *surface);
+        void displayGrid(SDL_Renderer *renderer);
         void resetGrid();
         void freeGrid();
+
     private:
         std::vector<std::vector<Cell *>> _grid;
         Map *_map;
