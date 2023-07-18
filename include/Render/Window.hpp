@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "Render/Grid.hpp"
+#include "Render/Message.hpp"
 
 class MyWindow {
     public:
@@ -18,4 +19,9 @@ class MyWindow {
         bool _running;
         Map *_map;
         Grid *_grid;
+
+        Message *_noiseMessage;
+        Message *_iterationMessage;
+        Message *_widthMessage;
+        Message *_heightMessage;
 };

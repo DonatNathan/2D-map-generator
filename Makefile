@@ -4,6 +4,7 @@ src = src/main.cpp	\
 	  src/Render/Window.cpp	\
 	  src/Render/Grid.cpp	\
 	  src/Render/Cell.cpp	\
+	  src/Render/Message.cpp    \
 
 NAME = map_generator
 OBJ = ${src:.cpp=.o}

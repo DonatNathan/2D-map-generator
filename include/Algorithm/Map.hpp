@@ -24,6 +24,10 @@ class Map {
         void writeMapOnFile();
 
         std::vector<std::vector<int>> *getMap();
+        int getNoise();
+        int getIteration();
+        int getWidth();
+        int getHeight();
 
     private:
         std::vector<std::vector<int>> _map;

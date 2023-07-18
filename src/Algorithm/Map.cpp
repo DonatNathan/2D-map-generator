@@ -172,3 +172,23 @@ void Map::writeMapOnFile()
     }
     std::cout << "Map saved." << std::endl;
 }
+
+int Map::getNoise()
+{
+    return _noisePercentage;
+}
+
+int Map::getIteration()
+{
+    return _iteration;
+}
+
+int Map::getHeight()
+{
+    return _height;
+}
+
+int Map::getWidth()
+{
+    return _width;
+}
