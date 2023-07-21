@@ -3,7 +3,7 @@
 
 class Cell {
     public:
-        Cell(int size, int x, int y, int color);
+        Cell(int size, int x, int y, int color, bool isAdmin);
         ~Cell();
 
         void displayCell(SDL_Renderer *renderer);

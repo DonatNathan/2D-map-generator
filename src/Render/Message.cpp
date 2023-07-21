@@ -8,7 +8,7 @@ Message::Message(std::string msg, SDL_Renderer *renderer, int x, int y, int valu
     _font = TTF_OpenFont("assets/arial.ttf", 24);
     if (_font == NULL)
         std::cout << "Failed to load font : " << TTF_GetError() << std::endl;
-    _color = {155, 155, 155};
+    _color = {100, 100, 100};
     _text = TTF_RenderText_Solid(_font, (_base + std::to_string(value)).c_str(), {255, 255, 255, 255});
     _object = {_posX, _posY, _text->w, _text->h};
     _texture = SDL_CreateTextureFromSurface(renderer, _text);

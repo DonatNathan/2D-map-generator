@@ -11,6 +11,7 @@ class MyWindow {
         void startLoop();
         void checkEvents();
         void drawWindow();
+        void drawInfos();
 
     private:
         SDL_Window *_window;
@@ -24,4 +25,7 @@ class MyWindow {
         Message *_iterationMessage;
         Message *_widthMessage;
         Message *_heightMessage;
+
+        bool _displayInfos;
+        bool _adminMod;
 };

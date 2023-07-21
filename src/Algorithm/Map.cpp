@@ -49,21 +49,37 @@ void Map::nextIteration()
 {
     std::vector<std::vector<int>> newMap;
 
+    writeMapOnFile("saves/save" + std::to_string(_iteration));
     int cmpt_y = 1;
     for (auto y = _map.begin(); y != _map.end(); y++, cmpt_y++) {
         std::vector<int> temp;
         int cmpt_x = 1;
-        for (auto x = (*y).begin(); x != (*y).end(); x++, cmpt_x++) {
+        for (auto x = y->begin(); x != y->end(); x++, cmpt_x++) {
             int nbWalls = countWall(cmpt_x, cmpt_y); //CountWall function
-            if (nbWalls > 4)
-                temp.push_back(1);
-            else
-                temp.push_back(0);
+            temp.push_back(nbWalls > 4 ? 1 : 0);
         }
         newMap.push_back(temp);
     }
     _iteration++;
+    _map = std::move(newMap);
+}
+
+void Map::previousIteration()
+{
+    std::vector<std::vector<int>> newMap;
+    std::ifstream file("saves/save" + std::to_string(_iteration - 1));
+    std::string line;
+
+    while (!file.eof()) {
+        std::vector<int> temp;
+        getline(file, line);
+        for (int cmpt = 0; cmpt < (int)line.length(); cmpt++)
+            temp.push_back(line.at(cmpt) - 48);
+        newMap.push_back(temp);
+    }
+    _iteration--;
     _map = newMap;
+    _map.erase(_map.end() - 1);
 }
 
 void Map::increaseNoise()
@@ -138,7 +154,7 @@ int Map::countWall(int x, int y)
     return nbWalls;
 }
 
-void Map::checkTwoSides(std::vector<int> vector, int x, int *nbWalls, bool mid)
+void Map::checkTwoSides(std::vector<int>& vector, int x, int *nbWalls, bool mid)
 {
     if (x != 1)
         *nbWalls += getCell(vector, x - 1);
@@ -156,7 +172,7 @@ std::vector<int> Map::getVector(int i)
     return *vector;
 }
 
-int Map::getCell(std::vector<int> vector, int i)
+int Map::getCell(std::vector<int>& vector, int i)
 {
     int cmpt = 1;
     auto cell = vector.begin();
@@ -164,16 +180,19 @@ int Map::getCell(std::vector<int> vector, int i)
     return *cell;
 }
 
-void Map::writeMapOnFile()
+void Map::writeMapOnFile(std::string path)
 {
-    std::ofstream file("map.txt");
+    std::ofstream file(path);
     for (auto y = _map.begin(); y != _map.end(); y++) {
         for (auto x = (*y).begin(); x != (*y).end(); x++) {
             file << (*x);
         }
         file << std::endl;
     }
-    std::cout << "Map saved." << std::endl;
+    if (path == "map.txt")
+        std::cout << "Map saved." << std::endl;
+    else
+        std::cout << "Save created." << std::endl;
 }
 
 int Map::getNoise()
