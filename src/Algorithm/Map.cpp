@@ -62,6 +62,7 @@ void Map::nextIteration()
         }
         newMap.push_back(temp);
     }
+    _iteration++;
     _map = newMap;
 }
 
@@ -69,6 +70,7 @@ void Map::increaseNoise()
 {
     if (_noisePercentage <= 90) {
         _noisePercentage += 10;
+        _iteration = 0;
         resetMap();
     } else {
         std::cout << "Can not increase noise percentage" << std::endl;
@@ -79,6 +81,7 @@ void Map::decreaseNoise()
 {
     if (_noisePercentage >= 10) {
         _noisePercentage -= 10;
+        _iteration = 0;
         resetMap();
     } else {
         std::cout << "Can not decrease noise percentage" << std::endl;

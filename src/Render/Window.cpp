@@ -14,10 +14,10 @@ MyWindow::MyWindow(Map *map, Grid *grid)
     if (!_renderer)
         std::cerr << "Failed to load renderer : " << SDL_GetError() << std::endl;
     _running = true;
-    _noiseMessage = new Message("Noise percentage : ", _renderer);
-    _iterationMessage = new Message("Iteration : ", _renderer);
-    _heightMessage = new Message("Height : ", _renderer);
-    _widthMessage = new Message("Width : ", _renderer);
+    _noiseMessage = new Message("Noise percentage : ", _renderer, 0, 0, _map->getNoise());
+    _iterationMessage = new Message("Iteration : ", _renderer, 0, 25, _map->getIteration());
+    _heightMessage = new Message("Height : ", _renderer, 0, 50, _map->getHeight());
+    _widthMessage = new Message("Width : ", _renderer, 0, 75, _map->getWidth());
 }
 
 MyWindow::~MyWindow()
@@ -32,6 +32,9 @@ void MyWindow::drawWindow()
     SDL_RenderClear(_renderer);
     _grid->displayGrid(_renderer);
     _noiseMessage->displayMessage(_renderer);
+    _iterationMessage->displayMessage(_renderer);
+    _heightMessage->displayMessage(_renderer);
+    _widthMessage->displayMessage(_renderer);
     SDL_RenderPresent(_renderer);
 }
 
@@ -52,14 +55,19 @@ void MyWindow::checkEvents()
             if (_event.key.keysym.sym == SDLK_RIGHT) {
                 _map->nextIteration();
                 _grid->resetGrid();
+                _iterationMessage->updateMessage(_renderer, _map->getIteration());
             }
             if (_event.key.keysym.sym == SDLK_UP) {
                 _map->increaseNoise();
                 _grid->resetGrid();
+                _noiseMessage->updateMessage(_renderer, _map->getNoise());
+                _iterationMessage->updateMessage(_renderer, _map->getIteration());
             }
             if (_event.key.keysym.sym == SDLK_DOWN) {
                 _map->decreaseNoise();
                 _grid->resetGrid();
+                _noiseMessage->updateMessage(_renderer, _map->getNoise());
+                _iterationMessage->updateMessage(_renderer, _map->getIteration());
             }
             if (_event.key.keysym.sym == SDLK_RETURN)
                 _map->writeMapOnFile();
