@@ -17,10 +17,10 @@ MyWindow::MyWindow(Map *map, Grid *grid)
     if (!_renderer)
         std::cerr << "Failed to load renderer : " << SDL_GetError() << std::endl;
     _running = true;
-    _noiseMessage = new Message("Noise percentage : ", _renderer, 0, 0, _map->getNoise());
-    _iterationMessage = new Message("Iteration : ", _renderer, 0, 27, _map->getIteration());
-    _heightMessage = new Message("Height : ", _renderer, 0, 54, _map->getHeight());
-    _widthMessage = new Message("Width : ", _renderer, 0, 81, _map->getWidth());
+    _noiseMessage = std::make_unique<Message>("Noise percentage : ", _renderer, 0, 0, _map->getNoise());
+    _iterationMessage = std::make_unique<Message>("Iteration : ", _renderer, 0, 27, _map->getIteration());
+    _heightMessage = std::make_unique<Message>("Height : ", _renderer, 0, 54, _map->getHeight());
+    _widthMessage = std::make_unique<Message>("Width : ", _renderer, 0, 81, _map->getWidth());
 }
 
 MyWindow::~MyWindow()

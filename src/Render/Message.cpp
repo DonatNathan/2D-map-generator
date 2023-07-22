@@ -16,7 +16,8 @@ Message::Message(std::string msg, SDL_Renderer *renderer, int x, int y, int valu
 
 Message::~Message()
 {
-
+    SDL_DestroyTexture(_texture);
+    SDL_FreeSurface(_text);
 }
 
 void Message::displayMessage(SDL_Renderer *renderer)

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include <SDL2/SDL.h>
 #include "Render/Grid.hpp"
 #include "Render/Message.hpp"
@@ -21,10 +22,10 @@ class MyWindow {
         Map *_map;
         Grid *_grid;
 
-        Message *_noiseMessage;
-        Message *_iterationMessage;
-        Message *_widthMessage;
-        Message *_heightMessage;
+        std::unique_ptr<Message> _noiseMessage;
+        std::unique_ptr<Message> _iterationMessage;
+        std::unique_ptr<Message> _widthMessage;
+        std::unique_ptr<Message> _heightMessage;
 
         bool _displayInfos;
         bool _adminMod;
