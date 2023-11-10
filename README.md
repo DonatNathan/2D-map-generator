@@ -41,11 +41,14 @@ Left Arrow | Go to the previous iteration
 Right Arrow | Go to the next iteration
 Upper Arrow | Increase noise percentage
 Lower Arrow | Decrease noise percentage
+Enter | Save map on map.txt
 
 ## Examples of render
 
 ### Original
-![image](https://github.com/DonatNathan/Map-Generator-2D/assets/91681379/9c1344c6-28c3-4c64-a0eb-7cde0307d9f5)
+![map](https://github.com/DonatNathan/2D-map-generator/assets/91681379/494d7433-be77-457c-adeb-717f76ed0971)
+
 
 ### Colorful
-![image](https://github.com/DonatNathan/2D-map-generator/assets/map_colorful.png)
+![map_coloful](https://github.com/DonatNathan/2D-map-generator/assets/91681379/7b615d56-e1ed-4b60-8377-f5ef74980492)
+
