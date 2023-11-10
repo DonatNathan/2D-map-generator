@@ -6,7 +6,7 @@ This is a simple map generator using procedural generation.
 
 Linux :
 ```
-sudo pacman -Sy sfml
+sudo pacman -Sy sdl2
 ```
 
 ## Compilation
@@ -48,3 +48,4 @@ Lower Arrow | Decrease noise percentage
 ![image](https://github.com/DonatNathan/Map-Generator-2D/assets/91681379/9c1344c6-28c3-4c64-a0eb-7cde0307d9f5)
 
 ### Colorful
+![image](https://github.com/DonatNathan/2D-map-generator/assets/map_colorful.png)
